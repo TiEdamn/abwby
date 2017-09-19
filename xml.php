@@ -1,3 +1,15 @@
+<?
+/*$max = 2;
+$xml = simplexml_load_file('xml/autoru2.xml');
+for ($i = 0; $i < $xml->offers->offer->count(); $i++){
+    echo $i.' '.$xml->offers->offer[$i]->url;
+    echo date('Y-m-d H:i:s', strtotime($xml->offers->offer[$i]->date));
+    echo $xml->offers->offer[$i]->sell-city;
+    echo "<br/>";
+    echo $i.' '.$xml->offers->offer[$i]->image[0];
+    echo "<br/>";
+}*/
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,10 +45,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class=active><a href="/">Home</a></li>
+                <li ><a href="/">Home</a></li>
                 <li ><a href="/calc.html">Calc</a></li>
                 <li ><a href="/map.html">Map</a></li>
-                <li ><a href="/xml.php">XML</a></li>
+                <li class=active><a href="/xml.php">XML</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -44,10 +56,13 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-md-12">
-            <h1>Bootstrap starter template</h1>
-            <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <div class="col-md-12 text-center">
+            <h2>Выгрузка данных из XML</h2>
+            <p class="lead">Файл autoru.xml должен быть загружен через ftp в папку xml (xml/autoru.xml)</p>
+            <button class="btn btn-success btn-lg btn-import"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Импорт</button>
+            <p id="result" class="hidden">Обработано <span class="count"></span> из <span class="total"></span></p>
         </div>
+        <div class="col-md-12"></div>
     </div>
 
 </div><!-- /.container -->

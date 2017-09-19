@@ -60,6 +60,13 @@ $(document).ready(function(){
         });
     });
 
+    $('.btn-import').click(function(e){
+        e.preventDefault();
+        $(this).addClass('disabled').attr('disabled','disabled');
+        $(this).find('span').addClass('spin');
+        importXml(0,0,0);
+    });
+
     var _template = '<div class="form-group"><input type="text" class="form-control address-input" name="address[]" placeholder="Минск, пр-т Машерова 17" /><button class="btn btn-danger btn-delete">X</button></div>'
 
     $('.btn-add').click(function(e){
@@ -118,6 +125,27 @@ function init(points) {
             $('.error-block').removeClass('hidden');
             $('.address-input:eq('+index+')').addClass('error-form');
             console.log($('.address-input'));
+        }
+    });
+}
+
+function importXml(start, total, import_date) {
+    $.ajax({
+        type: "POST",
+        url: 'ajax/xml.php',
+        data: {start: start, total: total, import_date: import_date},
+        dataType: 'json',
+        success: function(response){
+            $('#result').removeClass('hidden');
+            if(response.total > response.current)
+            {
+                importXml(response.current,response.total);
+            } else {
+                $('.btn-import').removeClass('disabled').removeAttr('disabled');
+                $('.btn-import').find('span').removeClass('spin');
+            }
+            $('#result .count').text(response.current);
+            $('#result .total').text(response.total);
         }
     });
 }
